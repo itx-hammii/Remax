@@ -1,0 +1,55 @@
+@font-face {
+    font-family: 'Hazard';
+    font-style: normal;
+    font-weight: 5;
+    src: local('Hazard'), url('https://fonts.cdnfonts.com/s/11498/haw.woff') format('woff');
+}
+
+
+.build {
+    color: #FFFFFF;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1em;
+
+}
+
+.with {
+    color: #A4D7F4;
+    font-family: 'Hazard!', sans-serif;
+    font-size: 5.2rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    line-height: 0.8em;
+    letter-spacing: 0.1em;
+    word-spacing: 0;
+    font-stretch: narrower;
+}
+
+.paragraph {
+    font-family: 'Roboto', sans-serif;
+
+}
+
+
+.videoSection {
+    position: relative;
+    z-index: 2;
+}
+
+.ntnav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0
+}
+
+.uppertxt {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    right: 0;
+    z-index: 9999999;
+}
