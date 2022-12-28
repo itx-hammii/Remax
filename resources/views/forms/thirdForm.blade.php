@@ -18,21 +18,21 @@
                     <label for="language">Language (Upto 3 languages)</label>
                     <select name="language[]" id="language" class="form-control" multiple>
                         <option value="">Select your language</option>
-                        <option>English</option>
-                        <option>Urdu</option>
-                        <option>Hindi</option>
+                        @foreach($language as $value)
+                            <option value="{{$value->language}}">{{$value->language}}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="nationality">Nationality</label>
                     <select name="nationality" id="nationality" class="form-control">
                         <option value="">Select your nationality</option>
-                        <option value="pakistani">Pakistani</option>
-                        <option value="indian">Indian</option>
-                        <option value="canadian">Canadian</option>
+                        @foreach($nationality as $data)
+                            <option value="{{$data->nationality}}">{{$data->nationality}}</option>
+                        @endforeach
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Next</button>
             </form>
         </div>
 

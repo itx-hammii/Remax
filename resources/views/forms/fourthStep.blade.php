@@ -125,7 +125,7 @@
                     <label for="rera_card_no">RERA Card No</label>
                     <input type="tel" class="form-control" id="rera_card_no" name="rera_card_no" placeholder="Enter RERA Card Number">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Next</button>
             </form>
         </div>
 

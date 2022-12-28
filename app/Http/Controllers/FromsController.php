@@ -8,6 +8,8 @@ use App\Http\Requests\SecondStepFromRequest;
 use App\Http\Requests\ThirdStepFromRequest;
 use App\Models\FifthFrom;
 use App\Models\fourthStep;
+use App\Models\Language;
+use App\Models\Nationality;
 use App\Models\SecondStep;
 use App\Models\thirdStep;
 use Illuminate\Contracts\Foundation\Application;
@@ -130,7 +132,9 @@ class FromsController extends Controller
     }
     public function ThirdStepFrom()
     {
-        return view('forms.thirdForm');
+        $language = Language::all();
+        $nationality = Nationality::all();
+        return view('forms.thirdForm',compact('nationality','language'));
     }
 
     public function ThirdStepDataStore(ThirdStepFromRequest $request)

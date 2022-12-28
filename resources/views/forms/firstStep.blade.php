@@ -25,7 +25,7 @@
                     <label for="phone_no">Phone No</label>
                     <input type="tel" class="form-control" id="phone_no" name="phone_no" placeholder="+97 xxx">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Next</button>
             </form>
         </div>
 
