@@ -164,11 +164,11 @@ class FromsController extends Controller
         $fourth_step->expiry_date = $request->expiry_date ? $request->expiry_date : null;
         $fourth_step->anticipated_date = $request->anticipated_date ? $request->anticipated_date : null;
         $fourth_step->driving_license = $request->driving_license;
-        $fourth_step->own_car = $request->own_car;
+        $fourth_step->own_car = $request->own_car ? $request->own_car : null;
         $fourth_step->work_experience = $request->work_experience;
         $fourth_step->real_estate_experience = $request->real_estate_experience;
         $fourth_step->dubai_real_estate_experience = $request->dubai_real_estate_experience;
-        $fourth_step->rera_card = $request->rera_card;
+        $fourth_step->rera_card = $request->rera_card ? $request->rera_card : null;
         $fourth_step->rera_card_no = $request->rera_card_no ? $request->rera_card_no : null;
         $fourth_step->save();
         if($request->present_in_uae == 'no' || $request->driving_license == 'no' ||$request->own_car == 'no' || $request->work_experience== 0 ||
@@ -198,9 +198,9 @@ class FromsController extends Controller
     }
 
 
-    public function DisplayData()
+    public function DisplayDataAdmin()
     {
-        $data = FirstStep::with('SecondStep.ThirdStep.FourthStep.FifthStep')->get();
-        return $data;
+        $user_details = FirstStep::with('SecondStep.ThirdStep.FourthStep.FifthStep')->simplePaginate(10);
+        return view('adminPanel.pages.Users.index',compact('user_details'));
     }
 }

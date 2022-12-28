@@ -27,11 +27,9 @@ class FourthStepFromRequest extends FormRequest
             'present_in_uae' => 'required',
             'visa_status'=> 'required',
             'driving_license' => 'required',
-            'own_car' => 'required',
             'work_experience' => 'required',
             'real_estate_experience' => 'required',
             'dubai_real_estate_experience' => 'required',
-            'rera_card' => 'required'
         ];
     }
 }

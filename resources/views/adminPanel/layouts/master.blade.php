@@ -28,7 +28,7 @@
         </ul>
 
         <!-- SEARCH FORM -->
-        <form class="form-inline ml-3">
+        <form class="form-inline ml-3 d-none">
             <div class="input-group input-group-sm">
                 <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
                 <div class="input-group-append">
@@ -40,7 +40,7 @@
         </form>
 
         <!-- Right navbar links -->
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto d-none">
             <!-- Notifications Dropdown Menu -->
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
@@ -84,7 +84,7 @@
         <a href="" class="brand-link">
             <img src="{{asset('adminPanel/images/AdminLTELogo.png')}}" alt="Logo" class="brand-image img-circle elevation-3"
                  style="opacity: .8">
-            <span class="brand-text font-weight-light">Admin Panel</span>
+            <span class="brand-text font-weight-light">Remax - Admin</span>
         </a>
 
         <!-- Sidebar -->

@@ -1,10 +1,12 @@
-@font-face {
-    font-family: 'Hazard';
-    font-style: normal;
-    font-weight: 5;
-    src: local('Hazard'), url('https://fonts.cdnfonts.com/s/11498/haw.woff') format('woff');
+/*@font-face {*/
+/*    font-family: 'Hazard';*/
+/*    font-style: normal;*/
+/*    font-weight: 5;*/
+/*    src: local('Hazard'), url('https://fonts.cdnfonts.com/s/11498/haw.woff') format('woff');*/
+/*}*/
+body {
+    font-family: "Hazard!", Sans-serif;
 }
-
 
 .build {
     color: #FFFFFF;
@@ -52,4 +54,21 @@
     left: 0;
     right: 0;
     z-index: 9999999;
+}
+
+/*.video-div {*/
+/*    width: 85%;*/
+/*    min-height: 945px;*/
+/*}*/
+@media (max-width:768px) {
+    .video-div {
+        width: 100%;
+        min-height: 860px;
+    }
+}
+@media (max-width:1024px) {
+    .video-div {
+        width: 100%;
+        min-height: 800px;
+    }
 }

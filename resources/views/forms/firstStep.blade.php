@@ -10,7 +10,7 @@
 @section('content')
     <div class="container">
         <div class="my-5">
-            <h1>First From</h1>
+            <h1>Introduction</h1>
             <form class="card shadow p-5" id="firstStep" method="POST" action="{{route('first.step.post')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
@@ -23,7 +23,7 @@
                 </div>
                 <div class="form-group">
                     <label for="phone_no">Phone No</label>
-                    <input type="tel" class="form-control" id="phone_no" name="phone_no" placeholder="Enter phone number">
+                    <input type="tel" class="form-control" id="phone_no" name="phone_no" placeholder="+97 xxx">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

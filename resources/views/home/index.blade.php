@@ -33,7 +33,7 @@
             </div>
         </div>
     </div>
-    <video width="100%" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+    <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
         <source src="{{asset('img/jr_vid_bg.mp4-vimeo-778597626-hls-akfire_interconnect_quic_sep-4430.mp4')}}"
                 type="video/mp4">
     </video>

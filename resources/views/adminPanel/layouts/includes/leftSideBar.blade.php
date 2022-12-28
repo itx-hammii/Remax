@@ -10,6 +10,14 @@
                 </p>
             </a>
         </li>
+        <li class="nav-item">
+            <a href="{{route('user.details')}}" class="nav-link @if(Request::route()->getName() == 'user.details') active @endif">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                    User Details
+                </p>
+            </a>
+        </li>
         <li class="nav-item text-light" style="bottom: 0;   position: fixed;">
             <a href="#"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link">
                 <i class="nav-icon fas fa-sign-out-alt"></i>

@@ -10,12 +10,12 @@
 @section('content')
     <div class="container">
         <div class="my-5">
-            <h1>Fourth From</h1>
+            <h1>One Last Step</h1>
             <form class="card shadow p-5" id="fourth_step" method="POST" action="{{route('fourth.step.post')}}" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="thirdStep" value="{{request()->data}}">
                 <div class="form-group">
-                    <label for="present_in_uae">Present in UAE</label>
+                    <label for="present_in_uae">Are you present in UAE ?</label>
                     <select name="present_in_uae" id="present_in_uae" class="form-control">
                         <option value="">Please select</option>
                         <option value="yes">Yes</option>
@@ -23,7 +23,7 @@
                     </select>
                 </div>
                 <div class="form-group" id="country_div" style="display: none;">
-                    <label for="country">Which Country</label>
+                    <label for="country">Which country are you in?</label>
                     <select name="country" id="country" class="form-control">
                         <option value="">Please select</option>
                         <option value="Pakistan">Pakistan</option>
@@ -31,7 +31,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="visa_status">Visa Status</label>
+                    <label for="visa_status">Visa Status in UAE</label>
                     <select name="visa_status" id="visa_status" class="form-control">
                         <option value="">Select your visa status</option>
                         <option value="visit">Visit</option>
@@ -54,7 +54,7 @@
                         <option value="no">No</option>
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group" id="own_car_div" style="display: none">
                     <label for="own_car">Own a Car in UAE</label>
                     <select name="own_car" id="own_car" class="form-control">
                         <option value="">Select your option</option>
@@ -63,7 +63,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="work_experience">Work Experience</label>
+                    <label for="work_experience">Total years of work Experience</label>
                     <select name="work_experience" id="work_experience" class="form-control">
                         <option value="">Select your option</option>
                         <option value="0">0</option>
@@ -80,7 +80,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="real_estate_experience">Real Estate Experience</label>
+                    <label for="real_estate_experience">Total years of Real Estate Experience</label>
                     <select name="real_estate_experience" id="real_estate_experience" class="form-control">
                         <option value="">Select your option</option>
                         <option value="0">0</option>
@@ -97,7 +97,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="dubai_real_estate_experience">Dubai Real Estate Experience</label>
+                    <label for="dubai_real_estate_experience">Total years of Dubai Real Estate Experience</label>
                     <select name="dubai_real_estate_experience" id="dubai_real_estate_experience" class="form-control">
                         <option value="">Select your option</option>
                         <option value="0">0</option>
@@ -113,7 +113,7 @@
                         <option value="10">10</option>
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group" id="rera_card_div" style="display: none;">
                     <label for="rera_card">Do you have RERA Card</label>
                     <select name="rera_card" id="rera_card" class="form-control">
                         <option value="">Select your option</option>
@@ -148,9 +148,6 @@
                     driving_license:{
                         required: true,
                     },
-                    own_car: {
-                        required: true,
-                    },
                     work_experience: {
                         required: true,
                     },
@@ -158,9 +155,6 @@
                         required: true,
                     },
                     dubai_real_estate_experience: {
-                        required: true,
-                    },
-                    rera_card: {
                         required: true,
                     }
                 }
@@ -174,6 +168,26 @@
             }else {
                 $('#country_div').css('display','none');
                 $('#country').val('');
+            }
+        });
+
+        // own a car div show on driving license
+        $(document).on('change','#driving_license',function (){
+            let driving_license = $('#driving_license').val();
+            if(driving_license == 'yes') {
+                $('#own_car_div').css('display','block');
+            }else {
+                $('#own_car_div').css('display','none').val('');
+            }
+        });
+
+        $(document).on('change','#dubai_real_estate_experience',function (){
+            let dubai_real_estate_experience = $('#dubai_real_estate_experience').val();
+            if(dubai_real_estate_experience > 0) {
+                $('#rera_card_div').css('display','block');
+            }else {
+                $('#rera_card_div').css('display','none').val('');
+                $('#rera_card_no_div').css('display','none').val('');
             }
         });
 

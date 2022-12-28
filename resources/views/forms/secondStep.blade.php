@@ -10,12 +10,12 @@
 @section('content')
     <div class="container">
         <div class="my-5">
-            <h1>Second  From</h1>
+            <h1>Are You Ready To</h1>
             <form class="card shadow p-5" id="second_step" method="POST" action="{{route('second.step.post')}}" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="firstStepEmail" value="{{request()->email}}">
                 <div class="form-group">
-                    <label for="international_client">Willing to work with International Client</label>
+                    <label for="international_client">Work with International Client</label>
                     <select name="international_client" id="international_client" class="form-control">
                         <option value="">Select Option</option>
                         <option value="yes">Yes</option>
@@ -31,7 +31,7 @@
                     </select>
                 </div>
                 <div class="form-group" id="learn_for_growth_div" style="display: block">
-                    <label for="learn_for_growth">Willing to learn for growth</label>
+                    <label for="learn_for_growth">Learn and Growth</label>
                     <select name="learn_for_growth" id="learn_for_growth" class="form-control" >
                         <option value="">Select Option</option>
                         <option value="yes">Yes</option>

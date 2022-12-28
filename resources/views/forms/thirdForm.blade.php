@@ -10,7 +10,7 @@
 @section('content')
     <div class="container">
         <div class="my-5">
-            <h1>Third From</h1>
+            <h1>About You</h1>
             <form class="card shadow p-5" id="third_step" method="POST" action="{{route('third.step.post')}}" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="secondStepId" value="{{request()->firstStep}}">
