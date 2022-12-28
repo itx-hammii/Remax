@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,12 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home.index');
+Auth::routes(['register' => false,'verify' => false,'confirm' => false]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/',function () { return view('home.index'); });
+
+// admin routes
+Route::group(['middleware'=> ['auth','admin']],function() {
+
 });
-Route::get('welcome', function () {
-    return view('welcome');
-})->name('welcome');
+
+Route::get('welcome', function () { return view('welcome'); })->name('welcome');
+
 Route::get('thank/you',[App\Http\Controllers\FromsController::class,'ThankYou'])->name('thank.you');
 
 Route::get('first/step',[App\Http\Controllers\FromsController::class,'index'])->name('first.step');
