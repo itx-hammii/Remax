@@ -55,7 +55,7 @@ class FromsController extends Controller
      */
     public function store(FirstStepRequest $request)
     {
-//        dd($request->all());
+    //    dd($request->all());
         $first_step = new FirstStep();
         $first_step->name = $request->name;
         $first_step->email = $request->email;
@@ -152,12 +152,13 @@ class FromsController extends Controller
 
     public function FourthStepFrom()
     {
-        return view('forms.fourthStep');
+        $nationality = Nationality::all();
+        return view('forms.fourthStep',compact('nationality'));
     }
 
     public function FourthStepDataStore(FourthStepFromRequest $request)
     {
-//        dd($request->all());
+    //    dd($request->all());
         $data = decrypt($request->thirdStep);
         $fourth_step = new fourthStep();
         $third_step = thirdStep::where('secondStepId',$data)->first();

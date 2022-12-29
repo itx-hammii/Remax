@@ -1,8 +1,8 @@
 @extends('layouts.master')
-@section('title','Fourth Step')
+@section('title', 'Fourth Step')
 @section('style')
     <style>
-        .error{
+        .error {
             color: red;
         }
     </style>
@@ -11,9 +11,10 @@
     <div class="container">
         <div class="my-5">
             <h1>One Last Step</h1>
-            <form class="card shadow p-5" id="fourth_step" method="POST" action="{{route('fourth.step.post')}}" enctype="multipart/form-data">
+            <form class="card shadow p-5" id="fourth_step" method="POST" action="{{ route('fourth.step.post') }}"
+                enctype="multipart/form-data">
                 @csrf
-                <input type="hidden" name="thirdStep" value="{{request()->data}}">
+                <input type="hidden" name="thirdStep" value="{{ request()->data }}">
                 <div class="form-group">
                     <label for="present_in_uae">Are you present in UAE ?</label>
                     <select name="present_in_uae" id="present_in_uae" class="form-control">
@@ -26,8 +27,9 @@
                     <label for="country">Which country are you in?</label>
                     <select name="country" id="country" class="form-control">
                         <option value="">Please select</option>
-                        <option value="Pakistan">Pakistan</option>
-                        <option value="India">India</option>
+                        @foreach ($nationality as $data)
+                            <option value="{{ $data->nationality }}">{{ $data->nationality }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group">
@@ -40,11 +42,13 @@
                 </div>
                 <div class="form-group" id="visa_expiry_date_div" style="display: none;">
                     <label for="expiry_date">Expiry Date</label>
-                    <input type="date" class="form-control" id="expiry_date" name="expiry_date" placeholder="Expiry Date">
+                    <input type="date" class="form-control" id="expiry_date" name="expiry_date"
+                        placeholder="Expiry Date">
                 </div>
                 <div class="form-group" id="visa_anticipated_date" style="display: none;">
                     <label for="anticipated_date">Anticipated Date</label>
-                    <input type="date" class="form-control" id="anticipated_date" name="anticipated_date" placeholder="Anticipated Date">
+                    <input type="date" class="form-control" id="anticipated_date" name="anticipated_date"
+                        placeholder="Anticipated Date">
                 </div>
                 <div class="form-group">
                     <label for="driving_license">Driving License of UAE</label>
@@ -123,7 +127,8 @@
                 </div>
                 <div class="form-group" id="rera_card_no_div" style="display: none">
                     <label for="rera_card_no">RERA Card No</label>
-                    <input type="tel" class="form-control" id="rera_card_no" name="rera_card_no" placeholder="Enter RERA Card Number">
+                    <input type="tel" class="form-control" id="rera_card_no" name="rera_card_no"
+                        placeholder="Enter RERA Card Number">
                 </div>
                 <button type="submit" class="btn btn-primary">Next</button>
             </form>
@@ -136,16 +141,16 @@
         $(document).ready(function() {
             // jquery validation plugIN
             $("#fourth_step").validate({
-                ignore:[],
+                ignore: [],
                 focusInvalid: false,
                 rules: {
-                    present_in_uae:{
+                    present_in_uae: {
                         required: true,
                     },
-                    visa_status:{
+                    visa_status: {
                         required: true,
                     },
-                    driving_license:{
+                    driving_license: {
                         required: true,
                     },
                     work_experience: {
@@ -160,58 +165,58 @@
                 }
             });
 
-        // show country dropdown on selecting NO on UAE Visa
-        $(document).on('change','#present_in_uae',function (){
-            let present_in_uae = $('#present_in_uae').val();
-            if(present_in_uae == 'no') {
-                $('#country_div').css('display','block');
-            }else {
-                $('#country_div').css('display','none');
-                $('#country').val('');
-            }
-        });
+            // show country dropdown on selecting NO on UAE Visa
+            $(document).on('change', '#present_in_uae', function() {
+                let present_in_uae = $('#present_in_uae').val();
+                if (present_in_uae == 'no') {
+                    $('#country_div').css('display', 'block');
+                } else {
+                    $('#country_div').css('display', 'none');
+                    $('#country').val('');
+                }
+            });
 
-        // own a car div show on driving license
-        $(document).on('change','#driving_license',function (){
-            let driving_license = $('#driving_license').val();
-            if(driving_license == 'yes') {
-                $('#own_car_div').css('display','block');
-            }else {
-                $('#own_car_div').css('display','none').val('');
-            }
-        });
+            // own a car div show on driving license
+            $(document).on('change', '#driving_license', function() {
+                let driving_license = $('#driving_license').val();
+                if (driving_license == 'yes') {
+                    $('#own_car_div').css('display', 'block');
+                } else {
+                    $('#own_car_div').css('display', 'none').val('');
+                }
+            });
 
-        $(document).on('change','#dubai_real_estate_experience',function (){
-            let dubai_real_estate_experience = $('#dubai_real_estate_experience').val();
-            if(dubai_real_estate_experience > 0) {
-                $('#rera_card_div').css('display','block');
-            }else {
-                $('#rera_card_div').css('display','none').val('');
-                $('#rera_card_no_div').css('display','none').val('');
-            }
-        });
+            $(document).on('change', '#dubai_real_estate_experience', function() {
+                let dubai_real_estate_experience = $('#dubai_real_estate_experience').val();
+                if (dubai_real_estate_experience > 0) {
+                    $('#rera_card_div').css('display', 'block');
+                } else {
+                    $('#rera_card_div').css('display', 'none').val('');
+                    $('#rera_card_no_div').css('display', 'none').val('');
+                }
+            });
 
-        // show the expiry date if visa status is visit
-        $(document).on('change','#visa_status',function () {
-            let visa_status = $('#visa_status').val();
-            if(visa_status == 'visit') {
-                $('#visa_expiry_date_div').css('display','block');
-                $('#visa_anticipated_date').css('display','none');
-                $('#anticipated_date').val('');
-            }else if(visa_status == 'resident'){
-                $('#visa_anticipated_date').css('display','block');
-                $('#visa_expiry_date_div').css('display','none');
-                $('#expiry_date').val('');
-            }
-        });
+            // show the expiry date if visa status is visit
+            $(document).on('change', '#visa_status', function() {
+                let visa_status = $('#visa_status').val();
+                if (visa_status == 'visit') {
+                    $('#visa_expiry_date_div').css('display', 'block');
+                    $('#visa_anticipated_date').css('display', 'none');
+                    $('#anticipated_date').val('');
+                } else if (visa_status == 'resident') {
+                    $('#visa_anticipated_date').css('display', 'block');
+                    $('#visa_expiry_date_div').css('display', 'none');
+                    $('#expiry_date').val('');
+                }
+            });
 
-        // rera card no field show on yes and hide on no
-            $(document).on('change','#rera_card',function () {
+            // rera card no field show on yes and hide on no
+            $(document).on('change', '#rera_card', function() {
                 let rera_card = $('#rera_card').val();
-                if(rera_card == 'yes') {
-                    $('#rera_card_no_div').css('display','block');
-                }else {
-                    $('#rera_card_no_div').css('display','none');
+                if (rera_card == 'yes') {
+                    $('#rera_card_no_div').css('display', 'block');
+                } else {
+                    $('#rera_card_no_div').css('display', 'none');
                     $('#rera_card_no').val('');
                 }
             });
