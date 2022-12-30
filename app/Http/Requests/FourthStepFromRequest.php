@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use Carbon\Carbon;
+use http\Message;
 use Illuminate\Foundation\Http\FormRequest;
 
 class FourthStepFromRequest extends FormRequest
@@ -30,6 +32,14 @@ class FourthStepFromRequest extends FormRequest
             'work_experience' => 'required',
             'real_estate_experience' => 'required',
             'dubai_real_estate_experience' => 'required',
+            'expiry_date' => 'date|before_or_equal:'.Carbon::today()->addDays(60),
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'expiry_date.before_or_equal' => 'Visit Visa Expiry date must be within or equal to 60 days.',
         ];
     }
 }

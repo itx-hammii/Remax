@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Fourth Step')
+@section('title', 'One Last Step')
 @section('style')
     <style>
         .error {
@@ -19,8 +19,8 @@
                     <label for="present_in_uae">Are you present in UAE ?</label>
                     <select name="present_in_uae" id="present_in_uae" class="form-control">
                         <option value="">Please select</option>
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
+                        <option value="yes" @if (old('present_in_uae') == 'yes') selected @endif>Yes</option>
+                        <option value="no" @if (old('present_in_uae') == 'no') selected @endif>No</option>
                     </select>
                 </div>
                 <div class="form-group" id="country_div" style="display: none;">
@@ -28,7 +28,8 @@
                     <select name="country" id="country" class="form-control">
                         <option value="">Please select</option>
                         @foreach ($nationality as $data)
-                            <option value="{{ $data->nationality }}">{{ $data->nationality }}</option>
+                            <option value="{{ $data->nationality }}" @if (old('country') == $data->nationality) selected @endif>
+                                {{ $data->nationality }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -36,14 +37,20 @@
                     <label for="visa_status">Visa Status in UAE</label>
                     <select name="visa_status" id="visa_status" class="form-control">
                         <option value="">Select your visa status</option>
-                        <option value="visit">Visit</option>
-                        <option value="resident">Resident</option>
+                        <option value="visit" @if (old('visa_status') == 'visit') selected @endif>Visit</option>
+                        <option value="resident" @if (old('visa_status') == 'resident') selected @endif>Resident</option>
                     </select>
                 </div>
-                <div class="form-group" id="visa_expiry_date_div" style="display: none;">
+                <div class="form-group" id="visa_expiry_date_div"
+                    style="@if (old('visa_status') != 'visit') display: none; @endif">
                     <label for="expiry_date">Expiry Date</label>
                     <input type="date" class="form-control" id="expiry_date" name="expiry_date"
                         placeholder="Expiry Date">
+                    @error('expiry_date')
+                        <div class="text-danger mt-2">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
                 <div class="form-group" id="visa_anticipated_date" style="display: none;">
                     <label for="anticipated_date">Anticipated Date</label>
@@ -54,11 +61,11 @@
                     <label for="driving_license">Driving License of UAE</label>
                     <select name="driving_license" id="driving_license" class="form-control">
                         <option value="">Select your option</option>
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
+                        <option value="yes" @if (old('driving_license') == 'yes') selected @endif>Yes</option>
+                        <option value="no" @if (old('driving_license') == 'no') selected @endif>No</option>
                     </select>
                 </div>
-                <div class="form-group" id="own_car_div" style="display: none">
+                <div class="form-group" id="own_car_div" style="@if (old('driving_license') != 'yes') display: none; @endif">
                     <label for="own_car">Own a Car in UAE</label>
                     <select name="own_car" id="own_car" class="form-control">
                         <option value="">Select your option</option>

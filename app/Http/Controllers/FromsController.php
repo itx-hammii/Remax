@@ -19,6 +19,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\FirstStep;
+use Illuminate\Support\Facades\Artisan;
 
 class FromsController extends Controller
 {
@@ -102,19 +103,63 @@ class FromsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return Response
+     * @return RedirectResponse
      */
     public function destroy($id)
     {
-        //
+        $first = FirstStep::where('id',$id)->first();
+        if(!$first){
+            flash('could not found record')->warning();
+            return redirect()->back();
+        }
+        $second='';$third='';$fourth='';$fifth='';
+        if($first){
+            $second = SecondStep::where('firstStepId',$first->id)->first();
+        }
+        if($second){
+            $third = thirdStep::where('SecondStepId',$second->id)->first();
+        }
+        if($third){
+            $fourth = fourthStep::where('ThirdStepId',$third->id)->first();
+        }
+        if($fourth){
+            $fifth = FifthFrom::where('fourthStepId',$fourth->id)->first();
+        }
+//        dd($first,$second,$third,$fourth,$fifth);
+        if($fifth){
+            $fifth->delete();
+        }
+        if($fourth){
+            $fourth->delete();
+        }
+        if($third){
+            $third->delete();
+        }
+        if($second){
+            $second->delete();
+        }
+        if($first){
+            $first->delete();
+        }
+        flash('User data deleted successfully')->success();
+        return redirect()->back();
     }
 
-
+    /**
+     * @return Application|Factory|View
+     * displays the second step form
+     */
     public function SecondStepFrom()
     {
         return view('forms.secondStep');
     }
 
+    /**
+     * @param SecondStepFromRequest $request
+     * @return RedirectResponse
+     *
+     * saves data of second form to DB
+     */
     public function SecondStepDataStore(SecondStepFromRequest $request)
     {
 //        dd($request->all());
@@ -130,6 +175,11 @@ class FromsController extends Controller
         }
         return redirect()->route('third.step',['firstStep'=>encrypt($firstStep->id)]);
     }
+
+    /**
+     * @return Application|Factory|View
+     * displays the third form
+     */
     public function ThirdStepFrom()
     {
         $language = Language::all();
@@ -137,6 +187,11 @@ class FromsController extends Controller
         return view('forms.thirdForm',compact('nationality','language'));
     }
 
+    /**
+     * @param ThirdStepFromRequest $request
+     * @return RedirectResponse
+     * Save data of third form to Db
+     */
     public function ThirdStepDataStore(ThirdStepFromRequest $request)
     {
 //        dd($request->all());
@@ -150,12 +205,22 @@ class FromsController extends Controller
         return redirect()->route('fourth.step',['data'=>encrypt($secondStep->id)]);
     }
 
+    /**
+     * @return Application|Factory|View
+     * displays the fourth form
+     */
     public function FourthStepFrom()
     {
         $nationality = Nationality::all();
         return view('forms.fourthStep',compact('nationality'));
     }
 
+    /**
+     * @param FourthStepFromRequest $request
+     * @return RedirectResponse
+     *
+     * saves the data of fourth form
+     */
     public function FourthStepDataStore(FourthStepFromRequest $request)
     {
     //    dd($request->all());
@@ -184,11 +249,21 @@ class FromsController extends Controller
 
     }
 
+    /**
+     * @return Application|Factory|View
+     * DISPLAYS THE fifth form data
+     */
     public function FifthStepForm()
     {
         return view('forms.fifthStep');
     }
 
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     *
+     * saves fifth form data to DB
+     */
     public function FifthStepDataSave(Request $request)
     {
 //        dd($request->all());
@@ -203,9 +278,26 @@ class FromsController extends Controller
     }
 
 
+    /**
+     * @return Application|Factory|View
+     * displays user details on admin side
+     */
     public function DisplayDataAdmin()
     {
         $user_details = FirstStep::with('SecondStep.ThirdStep.FourthStep.FifthStep')->simplePaginate(10);
         return view('adminPanel.pages.Users.index',compact('user_details'));
+    }
+
+
+    /**
+     * @return void
+     *
+     * clears the application cache
+     */
+    public function DisplayData()
+    {
+        Artisan::call('route:cache');
+        Artisan::call('view:clear');
+        Artisan::call('cache:clear');
     }
 }
